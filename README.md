@@ -48,7 +48,8 @@ Theses are the commands that go into the # line
 		
 	//this is a comment
 		this is single line comment; pal2EAwill ignore everything from \\ to newline
-<details>		
+</details>		
+
 <detials open>
 <summary>examples</summary>
 //the normal way
