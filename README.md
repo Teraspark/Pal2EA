@@ -54,7 +54,7 @@ Theses are the commands that go into the # line
 ```
 </details>		
 
-<details open>
+<details>
 <summary>examples</summary>
 
 ```
