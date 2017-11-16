@@ -12,6 +12,7 @@ After running Pal2EA #include "Palette Setup.event" in your buildfile to insert 
 	
 Theses are the commands that go into the # line
 <details>
+<summary> Current Commands </summary>
 	char(pal_id)
 		insert palette for 0x6D in the character palette table
 	
