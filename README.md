@@ -50,7 +50,7 @@ Theses are the commands that go into the # line
 		this is single line comment; pal2EAwill ignore everything from \\ to newline
 </details>		
 
-<detials open>
+<details open>
 <summary>examples</summary>
 //the normal way
 # char(palette_id) "Label" set{char_id, palette number, class}
