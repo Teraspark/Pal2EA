@@ -13,6 +13,7 @@ After running Pal2EA #include "Palette Setup.event" in your buildfile to insert 
 Theses are the commands that go into the # line
 <details>
 <summary> Current Commands </summary>
+
 ```
 	char(pal_id)
 		insert palette for 0x6D in the character palette table
@@ -56,6 +57,7 @@ Theses are the commands that go into the # line
 <details open>
 <summary>examples</summary>
 
+```
 //the normal way
 # char(palette_id) "Label" set{char_id, palette number, class}
    // use this to make single-line comments
@@ -92,6 +94,7 @@ Theses are the commands that go into the # line
 	5553FF7FFF6B1F4B2E195B4A722DCC18 182AFE14D8101004787B8E5E6739A514 
 	5553FF7FFF6B1F4B2E197243AC2AE611 182AC53F04338119757B8B626439A514 
 	5553FF7FFF6B1F4B2E195B6E9555CF3C 182A3879D2606C30757B8B626439A514
+```
 </details>
 	
 Changelog
