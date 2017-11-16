@@ -90,7 +90,7 @@ examples
 	
 Changelog
 v2.0
-	all palettes are read from one file
+	all palettes are read from one file now
 	
 v2.1
 	fixed mistake in FE7/FE6 macros in definitions file
