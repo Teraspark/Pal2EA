@@ -48,7 +48,8 @@ Theses are the commands that go into the # line
 	//this is a comment
 		this is single line comment; pal2EAwill ignore everything from \\ to newline
 		
-<detials><summary>examples</summary>
+<detials open>
+<summary>examples</summary>
 //the normal way
 # char(palette_id) "Label" set{char_id, palette number, class}
    // use this to make single-line comments
@@ -85,7 +86,7 @@ Theses are the commands that go into the # line
 	5553FF7FFF6B1F4B2E195B4A722DCC18 182AFE14D8101004787B8E5E6739A514 
 	5553FF7FFF6B1F4B2E197243AC2AE611 182AC53F04338119757B8B626439A514 
 	5553FF7FFF6B1F4B2E195B6E9555CF3C 182A3879D2606C30757B8B626439A514
-</details>
+<details>
 	
 Changelog
 
