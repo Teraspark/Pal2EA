@@ -1,5 +1,7 @@
 # Pal2EA
 
+Character palette compression tool for the Fire Emblem GBA games; to be used with Event Assembler
+
 Explanation
 
 the format for this is a # line which marks the start of an entry and holds the informationon what to do with the palette
