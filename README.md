@@ -103,6 +103,7 @@ Theses are the commands that go into the # line
 </details>
 <details>	
 	<summary>Changelog</summary>
+
 ```
 v2.0
 	all palettes are read from one file now
@@ -117,5 +118,6 @@ v2.2
 	implemented at{} so you can insert at a fixed offset
 	converted all () to {} for the sake of consistency
 	slightly improved error handling	
-```	
+```
+
 </details>
