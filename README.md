@@ -110,6 +110,7 @@ v2.0
 v2.1
 	fixed mistake in FE7/FE6 macros in definitions file
 	added auto{} to change autofill palette
+	
 v2.2
 	slightly altered definitions file
 	added U and P shortcuts for set{}
