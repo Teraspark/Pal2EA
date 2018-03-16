@@ -29,7 +29,7 @@ Theses are the commands that go into the # line
 		
 		palnum
 			if FE8, use 0x0-0x6 for the 7 palettes a character can have
-			if FE6/FE7, use 0x0 for the unpromoted palette and 0x1 for the promoted palette
+			if FE6/FE7, use U for the unpromoted palette and P for the promoted palette
 
 	[nc]
 		skip autofilll and compression
@@ -100,4 +100,7 @@ v2.1
 	added auto{} to change autofill palette
 v2.2
 	slightly altered definitions file
-	
+	added U and P shortcuts for set{}
+	implemented at{} so you can insert at a fixed offset
+	converted all () to {} for the sake of consistency
+	slightly improved error handling
