@@ -1,11 +1,11 @@
-pal2EA v2.0 input example
+pal2EA v2.2 input example
 
 -if no input file is detected you will be prompted for one at the start of the program
 
 Explanation
 
 the format for this is a # line which marks the start of an entry and holds the informationon what to do with the palette
-followed by the palettes in hex form. You should be able to paste the palette hex from ferecolor or any hex editor.
+followed by the palettes in hexadecimal. You should be able to paste the palette hex from ferecolor or any hex editor.
 The palettes go and separate lines and are ordered Player, Enemy, NPC, and P4 Arena; with a P1 Arena at the end for character palettes
 
 You can also use auto to have the palette autofilled with the autofill palette, which is the first palette by default
@@ -13,19 +13,19 @@ You can also use auto to have the palette autofilled with the autofill palette, 
 After running Pal2EA #include "Palette Setup.event" in your buildfile to insert all your palettes
 	
 Theses are the commands that go into the # line
-	char(pal_id)
+	char{pal_id}
 		insert palette for 0x6D in the character palette table
 	
-	gen(anim_id)
+	gen{anim_id}
 		insert a generic palette for a battle sprite animation
-		you can set the same generic palette to multiple animations by doing gen(id1, id2, id3, ...)
+		you can set the same generic palette to multiple animations by doing gen{id1, id2, id3, ...}
 	
 	"Label"
 		name of label for the palette that will be used in EA output
 
-	set{char_id, palnum, class}
-		insertion information; sets the palette to the character for you
-		is optional; for character palettes only
+	set{char_id, palnum, class_id} set{char_id,palnum}
+		insertion information; assigns the palette to a character
+		for character palettes only; class_id is only necessary in FE8
 		
 		palnum
 			if FE8, use 0x0-0x6 for the 7 palettes a character can have
@@ -49,11 +49,12 @@ Theses are the commands that go into the # line
 		
 	//this is a comment
 		this is single line comment; pal2EAwill ignore everything from \\ to newline
-		
+	at{offset}
+		insert the palette at the given offset;
 examples
 
 //the normal way
-# char(palette_id) "Label" set{char_id, palette number, class}
+# char{palette_id} "Label" set{char_id, palette number, class_id}
    // use this to make single-line comments
    player palette
    enemy palette
@@ -62,11 +63,11 @@ examples
    Arena Team 1
 
 //the lazy way
-# char(palette_id) "Label" set{char_id, palette number, class}
+# char{palette_id} "Label" set{char_id, palette number, class_id}
 	player palette
 	//pal2ea will autofill the rest for you
 	
-# char(0x6D) "Eirika_Mage" set{0x1, 0x1, 0x26} auto{1}
+# char{0x6D} "Eirika_Mage" set{0x1, 0x1, 0x26} auto{1}
 
 	//this is a comment
 	auto //autofill this one with the enemy palette
@@ -75,7 +76,7 @@ examples
 	5553FF7FFF6B1F4B2E19707F0C7BE25DFF1B9E1A9401182A9971D5606C3CA514 
 	5553FF7FFF6B1F4B2E19707F0C7BE25DFF1B9E1A9401182A8671C360633CA514
 	
-# gen(0x6C) "MageF"
+# gen{0x6C} "MageF"
 //female mage generic palette, this line is a comment
 5553FF7FFF6B1F4B2E198C5308430432187B5262293D392AA07A8055E03CA514 
 5553FF7FFF6B1F4B2E199C5118419030187B5262293D392A3E01D5008F00A514 
@@ -83,7 +84,7 @@ examples
 5553FF7FFF6B1F4B2E19947110618C40187B5262293D392A3E3DD8306F24A514
 
 //set the new recruit generic palette to both the lance and disarmed animations
-# gen(0x96,0x97) "Recruit Recolor"
+# gen{0x96,0x97} "Recruit Recolor"
 	5553FF7FFF6B1F4B2E197063AA4AE431 182AE5798461C130757B8B626439A514 
 	5553FF7FFF6B1F4B2E195B4A722DCC18 182AFE14D8101004787B8E5E6739A514 
 	5553FF7FFF6B1F4B2E197243AC2AE611 182AC53F04338119757B8B626439A514 
@@ -97,3 +98,6 @@ v2.0
 v2.1
 	fixed mistake in FE7/FE6 macros in definitions file
 	added auto{} to change autofill palette
+v2.2
+	slightly altered definitions file
+	
