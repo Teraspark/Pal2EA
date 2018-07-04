@@ -104,3 +104,7 @@ v2.2
 	implemented at{} so you can insert at a fixed offset
 	converted all () to {} for the sake of consistency
 	slightly improved error handling
+v2.3
+	improved syntax error handling
+	fixed problem that caused the program to crash if symbols were in the label name
+	added system for showing errors and warnings if there are any problems detected in the input file
