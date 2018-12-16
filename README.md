@@ -17,10 +17,10 @@ Theses are the commands that go into the # line
 <summary> Current Commands </summary>
 
 ```
-	char(pal_id)
+	char{pal_id}
 		insert palette for 0x6D in the character palette table
 	
-	gen(anim_id)
+	gen{anim_id}
 		insert a generic palette for a battle sprite animation
 		you can set the same generic palette to multiple animations by doing gen(id1, id2, id3, ...)
 	
