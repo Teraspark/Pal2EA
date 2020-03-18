@@ -14,7 +14,7 @@ After running Pal2EA #include "Palette Setup.event" in your buildfile to insert 
 	
 Theses are the commands that go into the # line
 	char{pal_id}
-		insert palette for 0x6D in the character palette table
+		insert palette for at the entry pal_id in the character palette table
 	
 	gen{anim_id}
 		insert a generic palette for a battle sprite animation
@@ -22,6 +22,7 @@ Theses are the commands that go into the # line
 	
 	"Label"
 		name of label for the palette that will be used in EA output
+		If a label is not found a basic one will be generated automatically
 
 	set{char_id, palnum, class_id} set{char_id,palnum}
 		insertion information; assigns the palette to a character
@@ -47,10 +48,13 @@ Theses are the commands that go into the # line
 		
 		the player palette will be used for autofill by default
 		
-	//this is a comment
-		this is single line comment; pal2EAwill ignore everything from \\ to newline
 	at{offset}
 		insert the palette at the given offset;
+
+	//this is a comment
+		This is single line comment; pal2EAwill ignore everything from \\ to newline
+		Multi-line comments may be implemented in a future update
+
 examples
 
 //the normal way
@@ -93,7 +97,14 @@ examples
 //example using EA's standard definitions
 #char{0x3D} "Hero Franz" set{Franz, 0x3, Hero}
 	5553FF7FFF6B1F4B2E1DDE1BD716D21D196B52568C41772BB22ACC11372EA514	
-	
+
+//FE7/FE6 Example
+//use U in set{} to assign this as the unpromoted palette
+#char{0x1} "Lyn Lord" set{Lyn,U}
+	5553FF7FFF6B3F3F711D4933641A8415567B6F5ECA499E1A927FA87E4369A514
+//use P in set{} to assign this as the promoted palette
+#char{0x1B} "Lyn Blade Lord" set{Lyn,P}
+	5553FF7FFF6B3F3F711D4933641AA311997F12770B569E1A496F69628255A514	
 Changelog
 v2.0
 	all palettes are read from one file
