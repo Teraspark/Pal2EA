@@ -14,7 +14,7 @@ After running Pal2EA #include "Palette Setup.event" in your buildfile to insert 
 	
 Theses are the commands that go into the # line
 	char{pal_id}
-		insert palette for at the entry pal_id in the character palette table
+		insert palette at the entry pal_id in the character palette table
 	
 	gen{anim_id}
 		insert a generic palette for a battle sprite animation
