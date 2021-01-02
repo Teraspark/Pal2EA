@@ -178,7 +178,7 @@ def getPaletteFile():
 			validfile = True
 		else:
 			print("This is not a valid file path")
-	return file
+	return os.path.abspath(file)
 
 def getinfo(line): #get metadata from # line
 		
