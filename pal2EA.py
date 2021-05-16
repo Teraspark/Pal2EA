@@ -214,8 +214,8 @@ class palfile:
 		
 	def removeComments():
 		'''removeComments()
-		remove single line "//comment" 
-		and multi line "/* comment */"
+		remove single line "//comments" 
+		and multi line "/* comments */"
 		from file before input is parsed
 		'''
 		mlc = False
@@ -225,12 +225,12 @@ class palfile:
 				if '*/' in text:
 					text = text[text.find('*/')+2:]
 					mlc = False
-				else text = ''
+				else: text = ''
 			if not mlc:
 				#remove single line comment
 				if '//' in text:
 					c = 0
-					while(c >= 0)):
+					while(c >= 0):
 						c = text.find('//')
 						#check if comment is inside of quotes
 						if not text.count('"')%2:
@@ -246,9 +246,12 @@ class palfile:
 							text = text[:c] + text[text.find('*/',c+2)+2:]
 						else:
 							text = text[:c]
+							mlc = True
 					
 			self.indata[lnum] = text
-		return 
+		if mlc:
+			self.meta.addError("Comment",text="Multi line comment missing closing '*/'")
+		return
 
 class palnode:
 	""" Handles the conversion of the given 
