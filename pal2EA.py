@@ -17,7 +17,8 @@ from io import StringIO
 ?	unsure/might return to later
 
 *?	argparse
-*	file input/output
+*	file input
+-	file output
 -	get palette from image
 
 +	Error handling
@@ -255,8 +256,8 @@ class palfile:
 		return
 
 class palnode:
-	""" Handles the conversion of the given 
-	file into a palnode class object"""
+	""" Handles the conversion of the data
+	into objects for output"""
 	#holds info relevant for a specfic entry in the file
 	
 	#point to palmeta
