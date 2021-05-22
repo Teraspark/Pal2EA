@@ -6,7 +6,7 @@ import lzss
 import argparse, csv
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
-from tkinter.filedialog import asksaveasfilename 
+from tkinter.filedialog import asksaveasfilename
 from pathlib import Path
 from io import StringIO
 
@@ -179,10 +179,10 @@ class palfile:
 	ancestors = ()
 	
 	def __init__(self,source,meta=None,parent=None):
-	''' __init__(self,meta=None,parent=None)
-	meta: palmeta
-	parent: palfile
-	'''
+		''' __init__(self,meta=None,parent=None)
+		meta: palmeta
+		parent: palfile
+		'''
 		self.infile = source
 		self.meta = meta
 		if(parent):
@@ -202,7 +202,7 @@ class palfile:
 	#FINISH THIS
 	def parseFile(self):
 		try:
-			with f as self.infile.open('r'):
+			with self.infile.open('r') as f:
 				#store file data as list of lines
 				self.indata = f.readlines()
 		except:
@@ -241,12 +241,13 @@ class palfile:
 					c = 0
 					while (c>=0):
 						c = text.find('/*')
-						#check if comment ends in same line
-						if '*/' in text[c+2:]:
-							text = text[:c] + text[text.find('*/',c+2)+2:]
-						else:
-							text = text[:c]
-							mlc = True
+						if not text.count('"',0,c)%2:
+							#check if comment ends in same line
+							if '*/' in text[c+2:]:
+								text = text[:c] + text[text.find('*/',c+2)+2:]
+							else:
+								text = text[:c]
+								mlc = True
 					
 			self.indata[lnum] = text
 		if mlc:
