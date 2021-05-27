@@ -212,16 +212,13 @@ class palfile:
 			return
 		def include(data):
 			print('include ' + str(data))
-			try:
-				newfile = Path(data[0])
-			except:
-				self.meta.addError('Include',file=self.infile,line=linenum)
-				return
-			if newfile.isValidFile() and not self.isAncestor(newfile):
+			newfile = self.infile.parent / data[0]
+			newfile = Path(os.path.abspath(newfile))
+			if isValidFile(newfile) and not self.isAncestor(newfile):
 				newfile = palfile(newfile,self.meta,self)
 				newfile.parseFile()
 			else:
-				self.meta.addError('Include',file=self.infile,line=linenum)
+				self.meta.addError('Include',file=self.infile,line=linenum,text= str(newfile) + " is an invaild file path")
 			return
 		def newNode(data):
 			newnode = palnode(source=self.infile,meta=self.meta)
@@ -237,6 +234,7 @@ class palfile:
 		commands = {
 			'#auto': autofill,
 			'#define': define,
+			'#include': include,
 			'#message': message,
 			'#new': newNode,
 			'#write': write
@@ -257,7 +255,7 @@ class palfile:
 				if c in commands:
 					commands[c](args)
 				else:
-					self.addError('definition',file=self.infile,line=linenum,text=str(data[0])+'is not defined')
+					self.meta.addError('definition',file=self.infile,line=linenum,text=str(data[0])+'is not defined')
 			#remove line after is has been parsed
 			self.indata.pop(0)
 			linenum += 1
