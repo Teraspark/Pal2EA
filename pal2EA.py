@@ -213,7 +213,7 @@ class palfile:
 		return
 	
 		
-	def removeComments():
+	def removeComments(self):
 		'''removeComments()
 		remove single line "//comments" 
 		and multi line "/* comments */"
@@ -231,24 +231,26 @@ class palfile:
 				#remove single line comment
 				if '//' in text:
 					c = 0
+					c = text.find('//')
 					while(c >= 0):
-						c = text.find('//')
 						#check if comment is inside of quotes
-						if not text.count('"')%2:
+						if not text[:c].count('"')%2:
 							#remove everything after '//'
 							text = text[:c]
+						c = text.find('//',c+2)
 				#remove multiline comment
 				if '/*' in text:
 					c = 0
+					c = text.find('/*')
 					while (c>=0):
-						c = text.find('/*')
-						if not text.count('"',0,c)%2:
+						if not text[:c].count('"',0,c)%2:
 							#check if comment ends in same line
 							if '*/' in text[c+2:]:
 								text = text[:c] + text[text.find('*/',c+2)+2:]
 							else:
 								text = text[:c]
 								mlc = True
+						c = text.find('/*',c+2)
 					
 			self.indata[lnum] = text
 		if mlc:
