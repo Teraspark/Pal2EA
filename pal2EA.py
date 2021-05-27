@@ -202,14 +202,65 @@ class palfile:
 	
 	#FINISH THIS
 	def parseFile(self):
+		linenum = 1
+		#subfunctions for primary commands
+		def autofill(data):
+			print('autofill ' + str(data))
+			return
+		def define(data):
+			print('define ' + str(data))
+			return
+		def include(data):
+			print('include ' + str(data))
+			try:
+				newfile = Path(data[0])
+			except:
+				self.meta.addError('Include',file=self.infile,line=linenum)
+				return
+			if newfile.isValidFile() and not self.isAncestor(newfile):
+				newfile = palfile(newfile,self.meta,self)
+				newfile.parseFile()
+			else:
+				self.meta.addError('Include',file=self.infile,line=linenum)
+			return
+		def newNode(data):
+			newnode = palnode(source=self.infile,meta=self.meta)
+			self.meta.addNode(newnode)
+			print('newnode ' + str(data))
+			return
+		def message(data):
+			print(str(self.infile)+':'+str(linenum)+':'+' '.join(data))
+			return
+		def write(data):
+			self.output.append(' '.join(data))
+			return
+		commands = {
+			'#auto': autofill,
+			'#define': define,
+			'#message': message,
+			'#new': newNode,
+			'#write': write
+			}
 		try:
 			with self.infile.open('r') as f:
 				#store file data as list of lines
 				self.indata = f.readlines()
 		except:
-			self.meta.addError("File",file-self.infile)
+			self.meta.addError("File",file=self.infile)
 		self.removeComments()
 		#call meta for info on how to parse content of file
+		while(self.indata):
+			#skip line if blank
+			if(self.indata[0].strip()):
+				c, *args = list(csv.reader(StringIO(self.indata[0]),delimiter=' '))[0]
+				
+				if c in commands:
+					commands[c](args)
+				else:
+					self.addError('definition',file=self.infile,line=linenum,text=str(data[0])+'is not defined')
+			#remove line after is has been parsed
+			self.indata.pop(0)
+			linenum += 1
 		return
 	
 		
