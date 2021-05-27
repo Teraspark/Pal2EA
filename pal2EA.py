@@ -111,7 +111,7 @@ class palmeta:
 		while(label and name in self.labelList):
 			name = label + str(n)
 			n += 1
-		else
+		else:
 			#add new name to list of existing labels
 			self.labelList.append(name)
 		return name
