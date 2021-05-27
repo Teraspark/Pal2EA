@@ -130,7 +130,7 @@ class palmeta:
 	def addError(self, etype, file=Path(), line=-1,text=""):
 		#fix this now that palfile is a thing
 		self.error = True
-		log = etype + ' warning: '
+		log = etype + ' error: '
 		if(file):
 			log += str(file) + ':'
 			if(line >= 0):
@@ -144,7 +144,7 @@ class palmeta:
 		self.nodeList.append(node)
 		return
 		
-	def genOutput():
+	def genOutput(self):
 		"""create all the output files
 		also prints out errors and warnings
 		not files are output if errors were detected"""
@@ -157,7 +157,7 @@ class palmeta:
 			for error in errorlog:
 				print(error)
 		if(self.warnlog):
-			for warning in warnlog:
+			for warning in self.warnlog:
 				print(warning)
 		if((not self.errorlog) and (not self.warnlog)):
 			print('No errors or warnings')
@@ -450,6 +450,7 @@ def generate(args):
 	palmain.addNode(firstnode)
 	start = palfile(args.input,palmain)
 	start.parseFile()
+	palmain.genOutput()
 	return
 
 if __name__ == '__main__':
