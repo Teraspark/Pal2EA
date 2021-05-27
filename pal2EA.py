@@ -179,7 +179,7 @@ class palfile:
 	#from to avoid endless include loops
 	ancestors = ()
 	
-	def __init__(self,source,meta=None,parent=None):
+	def __init__(self,source,meta,parent=None):
 		''' __init__(self,meta=None,parent=None)
 		meta: palmeta
 		parent: palfile
@@ -450,8 +450,8 @@ def generate(args):
 	palmain = palmeta()
 	firstnode = palnode(child=args.input,meta=palmain)
 	palmain.addNode(firstnode)
-	# start = palfile(palmain)
-	# start.parseFile(args.input)
+	start = palfile(args.input,palmain)
+	start.parseFile()
 	return
 
 if __name__ == '__main__':
