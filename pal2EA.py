@@ -11,6 +11,9 @@ from pathlib import Path
 from io import StringIO
 
 """
+# open file explorer window
+# subprocess.Popen(r'Explorer /select,' + '"' + filepath + '"')
+
 -	to do
 +	WIP
 *	Working
@@ -32,9 +35,18 @@ Parsing
 	*	handle duplicate names
 	-	handle user definitions
 	-	consider if statements
+	commands to finish
+		*	include
+		+	new
+		*	message
+		+	print (might change name later)
+		-	auto
+		-	define
+		-	set compression on/off
+		-	add palette command
 Output
-+	generating definition file
--	generate output files
+-	palette compression and output
+-	generate installer and setup files
 """
 
 #File loading/saving functions
