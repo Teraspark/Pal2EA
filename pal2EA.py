@@ -174,8 +174,6 @@ class palmeta:
 	
 class palfile:
 	meta = None
-	#line number first line of current entry in file
-	#curline = -1
 	
 	infile = None #file path to the input file being read
 	indata = [] #the data
@@ -184,7 +182,7 @@ class palfile:
 	#from to avoid endless include loops
 	ancestors = ()
 	
-	def __init__(self,source,meta,parent=None):
+	def __init__(self,meta,source,parent=None):
 		''' __init__(self,meta=None,parent=None)
 		meta: palmeta
 		parent: palfile
@@ -220,18 +218,31 @@ class palfile:
 			newfile = self.infile.parent / data[0]
 			newfile = Path(os.path.abspath(newfile))
 			if isValidFile(newfile) and not self.isAncestor(newfile):
-				newfile = palfile(newfile,self.meta,self)
+				newfile = palfile(self.meta,newfile,self)
 				newfile.parseFile()
 			else:
 				self.meta.addError('Include',file=self.infile,line=linenum,text= str(newfile) + " is an invaild file path")
 			return
 		def newNode(data):
-			newnode = palnode(source=self.infile,meta=self.meta)
-			self.meta.addNode(newnode)
+			if data:
+				newname = str(data[0])
+				#remove all spaces
+				newname = newname.strip().replace(' ','_')
+			else:
+				newname = ''
+			#check for characters that cannot be in label name
+			if bool(re.match("^[A-Za-z0-9_]*$", "test_string1")):
+				newnode = palnode(meta=self.meta,source=self.infile,line=linenum)
+				newnode.setName(newname)
+				# newname = self.meta.renameLabel(newnode,newname)
+				self.meta.addNode(newnode)
+			else:
+				self.meta.addError("Label",file=self.infile,line=linenum, text = newname)
+				pass #write to error log
 			print('newnode ' + str(data))
 			return
 		def message(data):
-			print(str(self.infile)+':'+str(linenum)+':'+' '.join(data))
+			print("message: " + str(self.infile)+':'+str(linenum)+':'+' '.join(data))
 			return
 		def write(data):
 			self.output.append(' '.join(data))
@@ -455,7 +466,7 @@ def generate(args):
 	palmain = palmeta()
 	firstnode = palnode(palmain,source=args.input)
 	palmain.addNode(firstnode)
-	start = palfile(args.input,palmain)
+	start = palfile(palmain, args.input)
 	start.parseFile()
 	palmain.genOutput()
 	return
