@@ -93,7 +93,7 @@ class palmeta:
 	
 	#folders = []
 	
-	def renameLabel(pnode,label=""):
+	def renameLabel(self,pnode,label=""):
 		"""renameLavel(pnode,label)
 			returns the label name as string
 		append number to the end of the label
@@ -111,14 +111,19 @@ class palmeta:
 		while(label and name in self.labelList):
 			name = label + str(n)
 			n += 1
-		else:
-			#add new name to list of existing labels
-			self.labelList.append(name)
+		#add new name to list of existing labels
+		if label in self.labelList:
+			message = label + ' already exists; changing to ' + name
+			self.addWarning(file=pnode.sfile,line=pnode.nline, text = message)
+		self.labelList.append(name)
 		return name
 		
-	def addWarning(self, wtype, file=Path(), line=-1,text= ""):
+	def addWarning(self, wtype='', file=Path(), line=-1,text= ""):
 		#fix this now that palfile is a thing
-		log = wtype + ' warning: '
+		log = ''
+		if wtype:
+			log += wtype + ' '
+		log += 'warning: '
 		if(file):
 			log += str(file) + ':'
 			if(line >= 0):
