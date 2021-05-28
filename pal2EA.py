@@ -318,26 +318,26 @@ class palnode:
 	sfile = None
 	
 	#file to be #included
-	child = None
+	# child = None
 	
 	#line of the file that this node is located at
-	curline = -1
+	nline = -1
 	
 	#Name to use for both the palette dump and label for this entry
 	name = ""
 	
 	#Type of palette (character,generic, etc.), affects the auto filling
-	pytpe = ""
+	# pytpe = ""
 	
 	#palette data
 	palette = bytearray()
 	
 	#list of indices of which palettes to replace,
 	#mainly to support setting generic palettes for battle animations
-	plist = []
+	# plist = []
 	
 	#list of character to palette assignments
-	slist = []
+	# slist = []
 	
 	repoint = ""
 	at = ""
@@ -346,21 +346,23 @@ class palnode:
 	cflag = True #compress palette if true
 	autod = 0 #autofill index
 	auton = 0 #number of palettes
-	autos = 0 #size of each palette
+	# autos = 0 #size of each palette
 		
-	def __init__(self,source=None,meta=None,child=None):
+	def __init__(self,meta,source=None,line=-1):
 		self.sfile = source
 		self.meta = meta
-		self.child = child
+		self.nline = line
 		return
 	
-	def getChild(self):
-		return self.child
-	
-	def parseEntry(self,entry,line=-1):
-	#def getinfo(line): #parse line
+	def setName(self,name):
+		self.name = self.meta.renameLabel(self,name)
 		return
 	
+	# def parseEntry(self,entry,line=-1):
+	# #def getinfo(line): #parse line
+		# return
+	
+	#REWRITE THIS
 	def autofill(self,paldata):
 	#''.join(paldata.split()) to get rid of whitespace
 		pals = paldata.split('\n')
@@ -446,7 +448,7 @@ def generate(args):
 	#create subfolder
 	#generate output files
 	palmain = palmeta()
-	firstnode = palnode(child=args.input,meta=palmain)
+	firstnode = palnode(palmain,source=args.input)
 	palmain.addNode(firstnode)
 	start = palfile(args.input,palmain)
 	start.parseFile()
