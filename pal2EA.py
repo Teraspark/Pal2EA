@@ -44,6 +44,7 @@ Parsing
 		-	define
 		-	set compression on/off
 		-	add palette command
+		-	add palette from image
 Output
 -	palette compression and output
 -	generate installer and setup files
@@ -98,6 +99,8 @@ class palmeta:
 	error = False
 	curerror = False #if current entry has an error
 	
+	output = []
+	definitions={}
 	errorlog = []
 	warnlog = []
 	labelList = [] #ensure unique labels for each entry
@@ -157,6 +160,11 @@ class palmeta:
 		
 		return
 	
+	def currentNode(self):
+		if self.nodeList:
+			return self.nodeList[-1]
+		return None
+		
 	def addNode(self, node):
 		self.nodeList.append(node)
 		return
@@ -248,6 +256,7 @@ class palfile:
 				newnode.setName(newname)
 				# newname = self.meta.renameLabel(newnode,newname)
 				self.meta.addNode(newnode)
+			#REMEMBER to copy over autofill settings from previous node
 			else:
 				self.meta.addError("Label",file=self.infile,line=linenum, text = newname)
 				pass #write to error log
@@ -273,6 +282,7 @@ class palfile:
 				self.indata = f.readlines()
 		except:
 			self.meta.addError("File",file=self.infile)
+			return
 		self.removeComments()
 		#call meta for info on how to parse content of file
 		while(self.indata):
@@ -459,11 +469,12 @@ def palette_hex(paldata, auto, comp):
 	
 	return contents
 
-def lineNumber(p, data):
-	lines = data[:p]
-	return lines.count('\n') + 1
+# def lineNumber(p, data):
+	# lines = data[:p]
+	# return lines.count('\n') + 1
 
 def is_hex(s):
+	"""check if given value is valid as hexadecimal"""
 	try:
 		int(s, 16)
 		return True
