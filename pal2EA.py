@@ -40,7 +40,7 @@ Parsing
 		+	new
 		*	message
 		+	print (might change name later)
-		-	auto
+		+	auto
 		-	define
 		-	set compression on/off
 		-	add palette command
@@ -229,6 +229,33 @@ class palfile:
 		#subfunctions for primary commands
 		def autofill(data):
 			print('autofill ' + str(data))
+			z = len(data)
+			#check for the right amount of arguments
+			if z > 2:
+				self.meta.addError("Argument",file=self.infile,line=linenum,text="too many arguments")
+				return
+			elif z == 0:
+				self.meta.addError("Argument",file=self.infile,line=linenum,text="requires 1-2 arguments")
+				return
+			
+			x = self.meta.currentNode()
+			
+			if x and z == 2:
+				#if second arugment, change amount of palettes
+				if data[1].isdigit():
+					x.auton = int(data[1])
+				elif is_hex(data[1]):
+					x.auton = int(data[1],16)
+			#first argument changes the autofill index
+			if x:
+				if data[0].isdigit():
+					d = int(data[0])
+				elif is_hex(data[0]):
+					d = int(data[0],16)
+				if d > x.auton:
+					self.meta.addError('Autofill',file=self.infile,line=linenum,text='new default is out of range')
+				else:
+					self.autod = d
 			return
 		def define(data):
 			print('define ' + str(data))
