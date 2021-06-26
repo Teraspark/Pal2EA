@@ -156,7 +156,7 @@ class palmeta:
 			if(line >= 0):
 				log += ' line ' +str(line) + ':'
 		log += text
-		self.warnlog.append(log)
+		self.errorlog.append(log)
 		
 		return
 	
@@ -179,11 +179,12 @@ class palmeta:
 			pass
 		
 		if(self.errorlog):
-			for error in errorlog:
+			for error in self.errorlog:
 				print(error)
 		if(self.warnlog):
 			for warning in self.warnlog:
 				print(warning)
+		
 		if((not self.errorlog) and (not self.warnlog)):
 			print('No errors or warnings')
 		elif(not self.errorlog):
