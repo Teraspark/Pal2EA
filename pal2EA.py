@@ -259,6 +259,11 @@ class palfile:
 					self.autod = d
 			return
 		def define(data):
+			#define thing(args) "definition"
+			
+			#parse thing(args) back together if split apart because of spaces? ie: thing(arg1, arg2, etc)
+			#create structure for holding defined values
+			
 			print('define ' + str(data))
 			return
 		def include(data):
@@ -279,7 +284,7 @@ class palfile:
 			else:
 				newname = ''
 			#check for characters that cannot be in label name
-			if bool(re.match("^[A-Za-z0-9_]*$", "test_string1")):
+			if bool(re.match("^[A-Za-z_]*[A-Za-z0-9_]*$", newname)):
 				newnode = palnode(meta=self.meta,source=self.infile,line=linenum)
 				newnode.setName(newname)
 				# newname = self.meta.renameLabel(newnode,newname)
@@ -312,10 +317,12 @@ class palfile:
 			self.meta.addError("File",file=self.infile)
 			return
 		self.removeComments()
-		#call meta for info on how to parse content of file
+		#ParsingLoop:
 		while(self.indata):
 			#skip line if blank
 			if(self.indata[0].strip()):
+				#fine & replace definitions with defined values
+				
 				c, *args = list(csv.reader(StringIO(self.indata[0]),delimiter=' '))[0]
 				
 				if c in commands:
