@@ -106,9 +106,9 @@ Theses are the commands that go into the # line
 #char{0x3D} "Hero Franz" set{Franz, 0x3, Hero}
 	5553FF7FFF6B1F4B2E1DDE1BD716D21D196B52568C41772BB22ACC11372EA514
 //FE7/FE6 Example
-#char{0x1} "Lyn Lord" set{Lyn,U}
+#char{0x1} "Lyn Lord" set{Lyn,0} //0 for unpromoted class
 	5553FF7FFF6B3F3F711D4933641A8415567B6F5ECA499E1A927FA87E4369A514
-#char{0x1B} "Lyn Blade Lord" set{Lyn,P}
+#char{0x1B} "Lyn Blade Lord" set{Lyn,1} //1 for promoted class
 	5553FF7FFF6B3F3F711D4933641AA311997F12770B569E1A496F69628255A514
 ```
 </details>
